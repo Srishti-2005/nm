@@ -1,0 +1,296 @@
+set MAVEN_HOME=C:\Users\malim\Downloads\apache-maven-3.9.16-bin\apache-maven-3.9.16
+set PATH=%MAVEN_HOME%\bin;%PATH%
+mvn -version
+set GRADLE_HOME=C:\Users\malim\Downloads\gradle-9.3.1-bin\gradle-9.3.1
+set PATH=%GRADLE_HOME%\bin;%PATH%
+gradle -version
+
+######################################
+lab_03
+set GRADLE_HOME=C:\Users\malim\Downloads\gradle-9.3.1-bin\gradle-9.3.1
+set PATH=%GRADLE_HOME%\bin;%PATH%
+gradle -version
+mkdir lab_3
+cd lab_3
+gradle init
+1
+3
+17
+gradle_test
+1
+1
+gradlew run
+tree
+
+
+#####################################
+lab_04 
+gradle init
+yes
+2
+yes
+gradlew clean build -x test
+gradle run
+plugins {
+    id 'java'
+    id 'application'
+    id 'maven-publish'
+}
+
+group = 'com.pgm4.test'
+version = '0.0.1-SNAPSHOT'
+description = 'pgm4'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'junit:junit:4.13.2'
+}
+
+application {
+    mainClass = 'com.pgm4.test.App'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from components.java
+        }
+    }
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+tasks.withType(Javadoc) {
+    options.encoding = 'UTF-8'
+}
+
+test {
+    useJUnit()
+}
+
+
+##############################################################
+lab_05
+Create “jenkins” Directory:
+mkdir jenkins && cd jenkins
+Copy .war file to “jenkins” Directory:
+copy "C:\Users\Student\Downloads\jenkins.war" “C:\Users\Student\jenkins”
+Run Jenkins Server:
+“C:\Program Files\OpenLogic\jdk-17.0.18.8-hotspot\bin\java”-jar jenkins.war-- 
+httpPort=8080
+Removing the Jenkins and its environment:
+Ctrl + C
+cd ..
+rmdir /s /q C:\Users\Student\jenkins
+rmdir /s /q C:\Users\Student\.jenkins
+
+
+
+
+lab_6
+set JAVA_HOME=C:\Program Files\Java\openlogic-openjdk-17.0.18+8-windows-x64
+set PATH=%JAVA_HOME%\bin;%PATH%
+set MAVEN_HOME=C:\Users\malim\Downloads\apache-maven-3.9.16-bin\apache-maven-3.9.16
+set PATH=%MAVEN_HOME%\bin;%PATH%
+mvn -version
+set GRADLE_HOME=C:\Users\malim\Downloads\gradle-9.3.1-bin\gradle-9.3.1
+set PATH=%GRADLE_HOME%\bin;%PATH%
+gradle -version
+where git 
+pipeline {
+    agent any
+
+    tools {
+        maven 'maven'
+        jdk 'JDK'
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main',
+                url: 'https://github.com/Srishti-2005/lab_6.git'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                bat 'mvn clean package'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                bat 'mvn test'
+            }
+        }
+    }
+
+    post {
+        always {
+            junit allowEmptyResults: true,
+                   testResults: '**/target/surefire-reports/*.xml'
+        }
+
+
+
+lab_07
+
+
+wget https://bootstrap.pypa.io/get-pip.py
+python3-m pip install--user ansible
+export PATH=$HOME/.local/bin:$PATH
+echo 'export PATH=$HOME/.local/bin:$PATH' >> ~/.bashrc
+source ~/.bashrc
+export LC_ALL=C.UTF-8
+export LANG=C.UTF-8
+ansible--version
+
+setup.yml---- name: Message Playbook
+hosts: local
+gather_facts: no
+tasks:- name: Print Hello Message
+debug:
+msg: "Hello from Ansible"
+student@dl003pc015-desktop:~$ gedit hosts.ini
+hosts.ini
+[local]
+localhost ansible_connection=local
+student@dl003pc015-desktop:~$ ls-student@dl003pc015-desktop:~$ ansible-playbook-i hosts.ini setup.yml
+
+
+
+lab_08
+wget https://archive.apache.org/dist/maven/maven-3/3.9.5/binaries/apache-maven-3.9.5-bin.tar.gz
+tar-xvzf apache-maven-3.9.5-bin.tar.gz
+mv~/apache-maven-3.9.5 ~/maven
+echo 'export PATH=$PATH:~/maven/bin' >> ~/.bashrc
+source ~/.bashrc
+mvn-version
+cd shemeema
+mvn archetype:generate-DgroupId=com.example-DartifactId=hello-world
+DarchetypeArtifactId=maven-archetype-quickstart-DinteractiveMode=false
+cd hello-world
+mvn package
+java-cp target/hello-world-1.0-SNAPSHOT.jar com.example.App
+output should look like
+helloworld
+
+
+pom.xml
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<modelVersion>4.0.0</modelVersion>
+<groupId>com.example</groupId>
+<artifactId>hello-world</artifactId>
+<packaging>jar</packaging>
+<version>1.0-SNAPSHOT</version>
+<name>hello-world</name>
+<url>http://maven.apache.org</url>
+<dependencies>
+<dependency>
+<groupId>junit</groupId>
+<artifactId>junit</artifactId>
+<version>3.8.1</version>
+<scope>test</scope>
+</dependency>
+</dependencies>
+<!-- ✅ADDTHIS SECTION HERE-->
+<build>
+<plugins>
+<plugin>
+<groupId>org.apache.maven.plugins</groupId>
+<artifactId>maven-jar-plugin</artifactId>
+<version>3.3.0</version>
+<configuration>
+<archive>
+<manifest>
+<mainClass>com.example.App</mainClass>
+</manifest>
+</archive>
+</configuration>
+</plugin>
+</plugins>
+</build>
+</project>
+come out of hello-world directory
+Follow the steps in 7th program to install ansible
+gedit hosts.ini
+copy paste the commands below
+[local]
+localhost ansible_connection=local
+gedit setup.yml- name: Deploy MavenArtifact
+hosts: local
+tasks:- name: Create deploy directory
+file:
+path: /home/student/deploy
+state: directory
+- name: Copy JAR
+copy:
+src: /home/student/shemeema/hello-world/target/hello-world-1.0-SNAPSHOT.jar
+dest: /home/student/deploy/- name: Run JAR
+command: java-jar /home/student/deploy/hello-world-1.0-SNAPSHOT.jar
+Jenikns
+wget https://get.jenkins.io/war-stable/latest/jenkins.war
+to run the server
+java-Xms512m-Xmx1024m-jar jenkins.war--httpPort=9090
+http://localhost:9090
+Get Initial Password
+Open another terminal:
+cat ~/.jenkins/secrets/initialAdminPassword
+Click on new item and give name
+choose pipeline
+add pipeline scripts
+pipeline {
+agent any
+environment {
+PROJECT_DIR = "/home/student/shemeema/hello-world"
+}
+stages {
+stage('Build') {
+steps {
+dir("${PROJECT_DIR}") {
+sh '
+export PATH=$HOME/maven/bin:$PATH
+mvn clean package
+'
+}
+}
+}
+stage('Verify') {
+steps {
+sh 'ls-l /home/student/shemeema/hello-world/target/'
+}
+}
+stage('Deploy') {
+steps {
+sh '
+export LC_ALL=C.UTF-8
+export LANG=C.UTF-8
+export PATH=$HOME/.local/bin:$PATH
+ansible-playbook-i /home/student/shemeema/hosts.ini
+/home/student/shemeema/setup.yml
+'
+}
+}
+}
+post {
+success {
+echo 'BUILD + DEPLOYSUCCESS✅'
+}
+failure {
+echo 'PIPELINE FAILED ❌'
+}
+}
